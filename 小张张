@@ -1,0 +1,167 @@
+local Main = {
+    tpwalkslow = 0,
+    tpwalkmobile = 0,
+    tpwalkquick = 0,
+    tpwalkslowenable = false,
+    tpwalkmobileenable = false,
+    tpwalkquickenable = false,
+    spinspeed = 0,
+    HitboxStatue = false,
+    HitboxSize = 0,
+    HitboxTransparency = 1,
+    HitboxBrickColor = "Really red"
+}
+
+local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/LENG8123/UI/refs/heads/main/ohio%20library.txt"))()        
+local win = ui:new("小张张脚本")
+--
+local UITab1 = win:Tab("『信息』",'16060333448')
+
+local about = UITab1:section("『作者信息』",false)
+
+about:Label("小张张脚本")
+about:Label("作者QQ：2562736407")
+about:Label("QQ群：不到")
+about:Label("作者：小张张")
+about:Label("进群发最新小张张脚本")
+about:Label("脚本持续更新中")
+about:Label("帮助者:月星,lishichuan丁丁,小皮")
+about:Label("蚊子,馋猫是小张张的儿子")
+about:Label("脚本懒得优化")
+about:Label("欢迎使用🤓")
+--
+local UITab355 = win:Tab("『人物』",'16060333448')
+
+local about = UITab355:section("『LENG script』",true)
+    
+about:Textbox("快速跑步（死后重置）建议用2", "tpwalking", "输入", function(king)
+local tspeed = king
+local hb = game:GetService("RunService").Heartbeat
+local tpwalking = true
+local player = game:GetService("Players")
+local lplr = player.LocalPlayer
+local chr = lplr.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+  if hum.MoveDirection.Magnitude > 0 then
+    if tspeed then
+      chr:TranslateBy(hum.MoveDirection * tonumber(tspeed))
+    else
+      chr:TranslateBy(hum.MoveDirection)
+    end
+  end
+end
+end)
+
+local bin = {
+    fovsize = 20,
+    fovlookAt = false,
+    fovcolor = Color3.fromRGB(255, 255, 255),
+    fovthickness = 2,
+    Visible = false,
+    distance = 40,
+    ViewportSize = 2,
+    Transparency = 1,
+    Position = "Head",
+    teamCheck = false,
+    wallCheck = false,
+    aliveCheck = false,
+    prejudgingselfsighting = false,
+    prejudgingselfsightingdistance = 0
+}
+
+local colorMap = {
+    ["红色"] = Color3.fromRGB(255, 0, 0),
+    ["蓝色"] = Color3.fromRGB(0, 0, 255),
+    ["黄色"] = Color3.fromRGB(255, 255, 0),
+    ["绿色"] = Color3.fromRGB(0, 255, 0),
+    ["青色"] = Color3.fromRGB(0, 255, 255),
+    ["橙色"] = Color3.fromRGB(255, 165, 0),
+    ["紫色"] = Color3.fromRGB(128, 0, 128),
+    ["白色"] = Color3.fromRGB(255, 255, 255),
+    ["黑色"] = Color3.fromRGB(0, 0, 0)
+}
+
+local function isSameTeam(player)
+    return player.Team ~= LocalPlayer.Team
+end
+
+local function isLookingAtWall(player, trg_part)
+    if not wallCheck then
+        return true
+    end
+
+    local localPlayerCharacter = Players.LocalPlayer.Character
+    if not localPlayerCharacter then
+        return false
+    end
+
+    local part = player.Character and player.Character:FindFirstChild(trg_part)
+    if not part then
+        return false
+    end
+
+    local ray = Ray.new(Cam.CFrame.Position, part.Position - Cam.CFrame.Position)
+    local hit, position = workspace:FindPartOnRayWithIgnoreList(ray, {localPlayerCharacter})
+
+回击和击中:IsDescendantOf(球员。人物)
+end
+
+local function createFOV(fov, color, thickness, transparency)
+    local RunService = game:GetService("RunService")
+local UserInputService = game:GetService(" UserInputService ")
+本地玩家= game:GetService("玩家")
+本地摄像头=游戏。工作区.当前摄像机
+
+如果FOVring那么
+FOVring:移除()
+结束
+
+FOVring = Drawing.new("Circle ")
+福弗林。可见=真
+福弗林。厚度=厚度
+福弗林。颜色=颜色
+福弗林。填充=假
+福弗林。半径=视野
+福弗林。位置=凸轮。ViewportSize / 2
+福弗林。透明度=透明度
+本地函数updateDrawings()
+本地camViewportSize = Cam .ViewportSize
+福弗林. Position = camViewportSize / 2
+结束
+
+    local function updatePlayerPositions(player)
+如果玩家==游戏。玩家。本地玩家然后返回结束
+本地角色=玩家。性格；角色；字母
+如果性格那么
+local humanidRootPart = character:FindFirstChild("HumanoidRootPart")
+如果humanoidRootPart那么
+local position = humanoidRootPart。位置
+如果不是球员位置[球员]那么
+playerPositions[player] = {}
+结束
+而#玩家位置[玩家]>框。预判自己的视距则
+桌子。移除(玩家位置[玩家]，1)
+结束
+桌子。插入(玩家位置[播放器],位置)
+结束
+结束
+结束
+    
+本地功能onKeyDown(输入)
+如果输入KeyCode == Enum。键码,那就删除
+运行服务:unbindromdrenderstep("FOV更新")
+FOVring:移除()
+结束
+结束
+
+用户输入服务。输入开始：连接(onKeyDown)
+
+局部函数看看(目标)
+局部lookVector = (target - Cam .CFrame。位置).单位
+local newCFrame = CFrame.new(Cam .位置,凸轮c帧位置+观察向量)
+小卡CFrame = newCFrame。
+结束
+
+本地函数是玩耍的(播放器)
+回归玩家。人物和玩家。字符
